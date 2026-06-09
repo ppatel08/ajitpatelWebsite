@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     } = req.body;
 
     const { error } = await resend.emails.send({
-      from: 'InSapna Insurance <noreply@insapnainsurance.com>',
+      from: 'InSapna Insurance <onboarding@resend.dev>',
       to: 'insapnainsurance@gmail.com',
       replyTo: email,
       subject: `New Quote Request — ${first_name} ${last_name}`,
