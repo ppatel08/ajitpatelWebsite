@@ -428,8 +428,10 @@
               <label for="expdate">Insurance Expiration Date</label>
               <input type="date" id="expdate" name="expiration_date" />
             </div>
-            <div class="field">
-              <label>&nbsp;</label>
+            <div class="field file-upload">
+              <label for="attachment">Attachment</label>
+              <input type="file" id="attachment" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt,.csv,.xls,.xlsx" />
+              <span class="file-hint">PDF, DOC, images — max 10 MB</span>
             </div>
           </div>
           <div class="row full">
@@ -490,19 +492,28 @@
       if(!valid) return;
       btn.textContent='Sending…'; btn.disabled=true;
       try {
+        const payload = {
+          first_name: document.getElementById('fname').value.trim(),
+          last_name: document.getElementById('lname').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          state: document.getElementById('state').value,
+          insurance_type: document.getElementById('instype').value,
+          expiration_date: document.getElementById('expdate').value,
+          comments: document.getElementById('comments').value.trim(),
+        };
+        const fileInput = document.getElementById('attachment');
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          if (file.size > 10 * 1024 * 1024) { alert('File must be under 10 MB.'); btn.textContent='Submit'; btn.disabled=false; return; }
+          const reader = new FileReader();
+          const base64 = await new Promise((resolve) => { reader.onload = () => resolve(reader.result.split(',')[1]); reader.readAsDataURL(file); });
+          payload.attachment = { filename: file.name, content: base64 };
+        }
         const res = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            first_name: document.getElementById('fname').value.trim(),
-            last_name: document.getElementById('lname').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            state: document.getElementById('state').value,
-            insurance_type: document.getElementById('instype').value,
-            expiration_date: document.getElementById('expdate').value,
-            comments: document.getElementById('comments').value.trim(),
-          }),
+          body: JSON.stringify(payload),
         });
         if (!res.ok) throw new Error('Send failed');
         form.style.display='none';

@@ -1,0 +1,16 @@
+{
+  "functions": {
+    "api/contact.js": {
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/contact",
+      "methods": ["POST"],
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}

@@ -17,11 +17,12 @@ export default async function handler(req, res) {
       insurance_type,
       expiration_date,
       comments,
+      attachment,
     } = req.body;
 
-    const { error } = await resend.emails.send({
+    const emailOptions = {
       from: 'InSapna Insurance <noreply@insapnainsurance.com>',
-      to: 'insapnainsurance@gmail.com',
+      to: 'priyank.patel118@gmail.com',
       replyTo: email,
       subject: `New Quote Request — ${first_name} ${last_name}`,
       html: `
@@ -43,7 +44,18 @@ export default async function handler(req, res) {
               <td style="padding:8px;border-bottom:1px solid #eee;">${comments || 'None'}</td></tr>
         </table>
       `,
-    });
+    };
+
+    if (attachment) {
+      emailOptions.attachments = [
+        {
+          filename: attachment.filename,
+          content: Buffer.from(attachment.content, 'base64'),
+        },
+      ];
+    }
+
+    const { error } = await resend.emails.send(emailOptions);
 
     if (error) {
       console.error('Resend error:', error);
