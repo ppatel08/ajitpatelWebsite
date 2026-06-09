@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     const emailOptions = {
       from: 'InSapna Insurance <noreply@insapnainsurance.com>',
-      to: 'priyank.patel118@gmail.com',
+      to: 'insapnainsurance@gmail.com',
       replyTo: email,
       subject: `New Quote Request — ${first_name} ${last_name}`,
       html: `
