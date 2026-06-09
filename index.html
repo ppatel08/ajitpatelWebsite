@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon — InSapna Insurance</title>
+  <meta name="description" content="InSapna Insurance is launching soon. Secure. Protect. Grow." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #F5F5F0;
+      --navy:       #1a3a6b;
+      --navy-dark:  #0e2247;
+      --navy-deep:  #091630;
+      --gold:       #c8821a;
+      --gold-lt:    #e09b2f;
+      --gold-pale:  #f0b84a;
+      --text:       #1a2a45;
+      --text-muted: #5a6a8a;
+    }
+
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Background ── */
+    .bg-wrap {
+      position: fixed; inset: 0; z-index: 0;
+      background: #F5F5F0;
+      overflow: hidden;
+    }
+    /* Subtle radial tints */
+    .bg-wrap::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,130,26,0.07) 0%, transparent 70%);
+      top: -60px; right: 5%;
+      pointer-events: none;
+    }
+    .bg-wrap::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,58,107,0.06) 0%, transparent 70%);
+      bottom: -80px; left: 5%;
+      pointer-events: none;
+    }
+    /* Wave at bottom */
+    .wave { position: absolute; bottom: 0; left: 0; width: 100%; }
+    .wave svg { display: block; width: 100%; }
+
+    /* ══ NAVBAR ══ */
+    .navbar {
+      position: relative;
+      z-index: 10;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      /* background: rgba(245,245,240,0.85); */
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      flex-shrink: 0;
+    }
+    .navbar img {
+      height: 120px; width: auto; object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(200,130,26,0.15));
+    }
+
+    /* ── Main grid ── */
+    .page {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 0;
+      height: calc(100vh - 60px);
+    }
+
+    /* ══ LEFT ══ */
+    .left {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 1.5rem 3rem 2rem 3.5rem;
+      overflow: hidden;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(200,130,26,0.12);
+      border: 0.5px solid rgba(200,130,26,0.4);
+      color: var(--gold);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 20px;
+      margin-bottom: 1rem; width: fit-content;
+    }
+    .badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:0.4;transform:scale(0.7);}
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.2vw, 3rem);
+      font-weight: 700; line-height: 1.12;
+      color: var(--navy-dark);
+      margin-bottom: 0.65rem;
+    }
+    h1 span { color: var(--gold-lt); }
+
+    .desc {
+      font-size: clamp(12px, 1.1vw, 14px);
+      color: var(--text-muted);
+      line-height: 1.75; font-weight: 400;
+      max-width: 400px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Countdown */
+    .countdown { display: flex; gap: 10px; margin-bottom: 1.5rem; }
+    .cd-box {
+      background: var(--navy-dark);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      text-align: center; min-width: 62px;
+    }
+    .cd-num {
+      display: block;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 700; line-height: 1; color: #fff;
+    }
+    .cd-label {
+      display: block;
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: white; margin-top: 3px;
+    }
+
+    .tagline {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .tline { flex: 0 0 36px; height: 0.5px; background: rgba(26,58,107,0.2); }
+    .tagline-text {
+      font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* Socials */
+    .socials { display: flex; gap: 10px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(26,58,107,0.2);
+      background: rgba(26,58,107,0.06);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .social-btn:hover {
+      border-color: var(--gold);
+      background: rgba(200,130,26,0.1);
+      color: var(--gold);
+    }
+    .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ══ RIGHT ══ */
+    .right {
+      display: flex; align-items: stretch; justify-content: center;
+      padding: 0 1px 22px 35px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.5rem 1.75rem 1.25rem;
+      width: 100%; max-width: 520px;
+      display: flex; flex-direction: column;
+      box-shadow: 0 8px 40px rgba(26,58,107,0.12), 0 1px 4px rgba(26,58,107,0.06);
+      border-top: 4px solid var(--gold);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+      font-weight: 700; color: var(--navy-dark);
+      text-align: center; margin-bottom: 0.15rem;
+    }
+    .card-sub {
+      font-size: 12px; color: #7a8aaa;
+      text-align: center; margin-bottom: 0.75rem;
+    }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .row.full { grid-template-columns: 1fr; }
+    .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 0.5rem; }
+
+    label {
+      font-size: 10px; font-weight: 600;
+      color: #5a6a8a; letter-spacing: 0.07em; text-transform: uppercase;
+    }
+    .req { color: var(--gold); margin-left: 1px; }
+
+    input, select, textarea {
+      background: #f8f8f5;
+      border: 1px solid #e0e4ee;
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 13px; color: var(--navy-dark);
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+      -webkit-appearance: none; appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: #b0bcd0; }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold); background: #fffdf8;
+    }
+    input.error, select.error, textarea.error {
+      border-color: #c8821a; background: #fffaf2;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23c8821a' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 11px center;
+      padding-right: 30px; cursor: pointer;
+    }
+    select option { background: #fff; color: var(--navy-dark); }
+    input[type="date"] { color-scheme: light; }
+    input[type="date"]::-webkit-calendar-picker-indicator { opacity:0.4; cursor:pointer; }
+    #contact-form { display: flex; flex-direction: column; flex: 1; }
+    #contact-form .row.full:last-of-type { flex: 1; }
+    #contact-form .row.full:last-of-type .field { flex: 1; }
+    #contact-form .row.full:last-of-type textarea { flex: 1; }
+    textarea { resize: none; min-height: 58px; line-height: 1.5; }
+    .file-upload { position: relative; }
+    .file-upload input[type="file"] {
+      width: 100%; padding: 7px 10px; border: 1.5px dashed #cfd8e8; border-radius: 8px;
+      background: #f4f6fa; cursor: pointer; font-size: 12px; color: #3a4a6b;
+    }
+    .file-upload input[type="file"]:hover { border-color: #c9a84c; background: #faf8f1; }
+    .file-upload input[type="file"]:focus { border-color: #c9a84c; outline: none; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+    .file-hint { font-size: 10px; color: #8a95a8; margin-top: 1px; }
+
+    .btn {
+      width: 100%; padding: 10px;
+      background: var(--navy-dark);
+      border: none; border-radius: 10px;
+      color: #fff; font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.03em;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 0.25rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn:active { transform: scale(0.99); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .secure-note { text-align: center; margin-top: 0.35rem; font-size: 10px; color: #a0aec0; }
+
+    /* Success */
+    .success-view { display:none; text-align:center; padding:2rem 1rem; }
+    .success-icon {
+      width:60px; height:60px;
+      background:rgba(200,130,26,0.1); border:1px solid rgba(200,130,26,0.3);
+      border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;
+    }
+    .success-icon svg { width:28px;height:28px;stroke:var(--gold);stroke-width:2.5;fill:none; }
+    .success-view h2 { font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy-dark);margin-bottom:0.4rem; }
+    .success-view p { font-size:13px;color:#7a8aaa;line-height:1.7; }
+
+    /* ════ RESPONSIVE ════ */
+    @media (max-width: 900px) {
+      html, body { height: auto; overflow: auto; }
+      body { display: block; }
+      .page { height: auto; grid-template-columns: 1fr; }
+      .left { padding: 2rem 1.75rem 1.5rem; align-items: center; text-align: center; overflow: visible; }
+      .desc { max-width: 520px; }
+      .badge { margin: 0 auto 1rem; }
+      .countdown { justify-content: center; }
+      .tagline { justify-content: center; }
+      .socials { justify-content: center; }
+      .right { align-items: center; padding: 1.5rem 1.75rem 2.5rem; overflow: visible; }
+      .card { max-width: 540px; margin: 0 auto; padding: 1.5rem 1.75rem 1.25rem; display: block; }
+      #contact-form { display: block; }
+      #contact-form .row.full:last-of-type textarea { height: 68px; }
+      .field { margin-bottom: 0.6rem; }
+    }
+    @media (max-width: 480px) {
+      .navbar { padding: 0 1.25rem; height: 70px; }
+      .navbar img { height: 90px; }
+      .left { padding: 1.5rem 1.25rem 1.25rem; }
+      .right { padding: 1rem 1.25rem 2rem; }
+      .row { grid-template-columns: 1fr; }
+      .card { padding: 1.25rem 1.25rem 1rem; }
+      input, select, textarea { font-size: 16px; }
+      .file-upload input[type="file"] { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-wrap" aria-hidden="true">
+    <div class="wave" style="bottom:-10px;opacity:0.12;">
+      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" height="180">
+        <path fill="#1a3a6b" d="M0,120L60,128C120,136,240,152,360,149C480,147,600,124,720,117C840,109,960,117,1080,131C1200,144,1320,160,1380,168L1440,176L1440,220L0,220Z"/>
+      </svg>
+    </div>
+    <div class="wave" style="bottom:-10px;opacity:0.07;">
+      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" height="140">
+        <path fill="#c8821a" d="M0,168L80,160C160,152,320,136,480,141C640,147,800,173,960,168C1120,163,1280,128,1360,112L1440,96L1440,220L0,220Z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <img src="logo.png" alt="InSapna Insurance — Secure. Protect. Grow." />
+  </nav>
+
+  <!-- MAIN -->
+  <div class="page">
+
+    <!-- LEFT -->
+    <div class="left">
+      <span class="badge"><span class="badge-dot"></span>Coming Soon</span>
+      <h1>Coverage You Can<br><span>Count On.</span></h1>
+      <p class="desc">
+        InSapna Insurance is launching soon. Be the first to get your personalized quote and secure your coverage — personal or commercial, we've got you covered.
+      </p>
+
+      <div class="countdown" role="timer" aria-label="Launch countdown">
+        <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Days</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hours</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Minutes</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Seconds</span></div>
+      </div>
+
+      <div class="tagline" style="color: #e09b2f">
+        <div class="tline" style="color: #e09b2f;"></div>
+        <span style="color: #e09b2f" class="tagline-text">Secure &nbsp;·&nbsp; Protect &nbsp;·&nbsp; Grow</span>
+        <div class="tline"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="card">
+        <h2 class="card-title">Get A Free Quote</h2>
+        <p class="card-sub">Fill out the form and we'll reach out with your quote</p>
+
+        <form
+          id="contact-form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/thank-you.html"
+          enctype="multipart/form-data"
+          novalidate
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <div style="display:none;" aria-hidden="true">
+            <label>Don't fill this: <input name="bot-field" /></label>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="fname">First Name<span class="req">*</span></label>
+              <input type="text" id="fname" name="first_name" placeholder="First name" autocomplete="given-name" required />
+            </div>
+            <div class="field">
+              <label for="lname">Last Name<span class="req">*</span></label>
+              <input type="text" id="lname" name="last_name" placeholder="Last name" autocomplete="family-name" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="email">Email<span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone<span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="state">State<span class="req">*</span></label>
+              <select id="state" name="state" required>
+                <option value="">Select state…</option>
+                <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+                <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+                <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+                <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+                <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+                <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+                <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+                <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+                <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                <option>Wisconsin</option><option>Wyoming</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="instype">Insurance Type<span class="req">*</span></label>
+              <select id="instype" name="insurance_type" required>
+                <option value="">Select type…</option>
+                <option>Personal</option>
+                <option>Commercial</option>
+                <option>Both</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="expdate">Insurance Expiration Date</label>
+              <input type="date" id="expdate" name="expiration_date" />
+            </div>
+            <div class="field file-upload">
+              <label for="attachment">Attachment</label>
+              <input type="file" id="attachment" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt,.csv,.xls,.xlsx" />
+              <span class="file-hint">PDF, DOC, images — max 10 MB</span>
+            </div>
+          </div>
+          <div class="row full">
+            <div class="field">
+              <label for="comments">Comments — Explain type of insurance needed</label>
+              <textarea id="comments" name="comments" placeholder="Tell us about your coverage needs, current policy, or any questions…"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn" id="submit-btn">Submit</button>
+          <p class="secure-note">🔒 Your information is secure and never shared</p>
+        </form>
+
+        <div class="success-view" id="success-view" role="alert" aria-live="polite">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h2>You're on the list!</h2>
+          <p>Thanks for reaching out. Our team will be in touch shortly with your personalized quote.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const LAUNCH = new Date('2026-09-01T00:00:00');
+    function tick() {
+      const diff = LAUNCH - Date.now();
+      if (diff <= 0) { ['days','hours','mins','secs'].forEach(id => document.getElementById('cd-'+id).textContent='00'); return; }
+      document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    }
+    tick(); setInterval(tick, 1000);
+
+    document.getElementById('phone').addEventListener('input', function () {
+      let v = this.value.replace(/\D/g,'').slice(0,10);
+      if (v.length>6) v='('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6);
+      else if (v.length>3) v='('+v.slice(0,3)+') '+v.slice(3);
+      else if (v.length) v='('+v;
+      this.value=v;
+    });
+
+    const form=document.getElementById('contact-form');
+    const btn=document.getElementById('submit-btn');
+    const reqIds=['fname','lname','email','phone','state','instype'];
+    form.addEventListener('submit',function(e){
+      let valid=true;
+      reqIds.forEach(id=>{
+        const el=document.getElementById(id); el.classList.remove('error');
+        if(!el.value.trim()){el.classList.add('error');if(valid)el.focus();valid=false;}
+      });
+      const em=document.getElementById('email');
+      if(em.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)){em.classList.add('error');if(valid)em.focus();valid=false;}
+      if(!valid){e.preventDefault();return;}
+      btn.textContent='Sending…'; btn.disabled=true;
+    });
+    reqIds.forEach(id=>document.getElementById(id).addEventListener('input',function(){this.classList.remove('error');}));
+  </script>
+
+</body>
+</html>
