@@ -94,78 +94,133 @@
     .left {
       display: flex; flex-direction: column;
       justify-content: center;
-      padding: 1.5rem 3rem 2rem 3.5rem;
-      overflow: hidden;
+      padding: 1.5rem 2rem 2rem 3rem;
+      min-width: 0;
     }
 
-    .badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(200,130,26,0.12);
-      border: 0.5px solid rgba(200,130,26,0.4);
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 0.9rem;
+    }
+    .eyebrow::before {
+      content: ''; width: 40px; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-pale));
+      border-radius: 2px;
+    }
+    .eyebrow span {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--gold);
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.13em; text-transform: uppercase;
-      padding: 4px 14px; border-radius: 20px;
-      margin-bottom: 1rem; width: fit-content;
-    }
-    .badge-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%,100%{opacity:1;transform:scale(1);}
-      50%{opacity:0.4;transform:scale(0.7);}
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.2vw, 3rem);
-      font-weight: 700; line-height: 1.12;
+      font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -0.01em;
       color: var(--navy-dark);
-      margin-bottom: 0.65rem;
+      margin-bottom: 1.75rem;
+      max-width: 22ch;   /* breaks after "grow" onto a second line */
     }
-    h1 span { color: var(--gold-lt); }
-
-    .desc {
-      font-size: clamp(12px, 1.1vw, 14px);
-      color: var(--text-muted);
-      line-height: 1.75; font-weight: 400;
-      max-width: 400px;
-      margin-bottom: 1.5rem;
+    /* gold accent word, matching the lotus flame in the logo */
+    h1 span {
+      color: #FFA707;
+      font-style: italic;
     }
 
-    /* Countdown */
-    .countdown { display: flex; gap: 10px; margin-bottom: 1.5rem; }
-    .cd-box {
-      background: var(--navy-dark);
-      border: none;
-      border-radius: 10px;
-      padding: 10px 14px;
-      text-align: center; min-width: 62px;
+
+    /* ══ COVERAGE CARDS ══ */
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      width: 100%;
+      align-items: stretch;
     }
-    .cd-num {
-      display: block;
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-      font-weight: 700; line-height: 1; color: #fff;
+    .cov-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 265px;
+      padding: 1.75rem;
+      display: flex; flex-direction: column;
+      color: #fff; text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .cd-label {
-      display: block;
-      font-size: 9px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: white; margin-top: 3px;
+    .cov-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 38px rgba(14,34,71,0.2);
+    }
+    /* Brand gradients — royal blue shield + gold lotus flame from the logo */
+    .cov-card.teal  { background: linear-gradient(160deg, #3b82d9 0%, #2360ad 30%, #163a72 66%, #0b1c3c 100%); }
+    .cov-card.olive { background: linear-gradient(160deg, #FDAF17 0%, #f5a512 30%, #8a5f1c 70%, #10203f 100%); }
+
+    /* keeps white text legible over the lighter top of each gradient */
+    .cov-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(9,18,40,0.26) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    /* lighter scrim so the gold stays true to the logo's flame */
+    .cov-card.olive::after {
+      background: linear-gradient(180deg, rgba(9,18,40,0.08) 0%, transparent 40%);
+    }
+    .cov-card > * { position: relative; z-index: 1; }
+
+    .cov-icon {
+      width: 50px; height: 50px; border-radius: 12px;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.4rem;
+    }
+    .cov-icon svg {
+      width: 22px; height: 22px;
+      stroke: #fff; stroke-width: 1.8; fill: none;
+      stroke-linecap: round; stroke-linejoin: round;
     }
 
-    .tagline {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 1.25rem;
+    .cov-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2vw, 1.85rem);
+      font-weight: 700; color: #fff;
+      line-height: 1.15;
+      margin: 0 0 0.9rem;
     }
-    .tline { flex: 0 0 36px; height: 0.5px; background: rgba(26,58,107,0.2); }
-    .tagline-text {
-      font-size: 10px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--text-muted);
+    .cov-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.4rem; }
+    .cov-tags span {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 12px; font-weight: 500;
+      color: #fff;
       white-space: nowrap;
     }
+    .cov-tags span.more {
+      background: transparent;
+      border-style: dashed;
+      border-color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.8);
+    }
+    .cov-link {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 14.5px; font-weight: 600; color: #fff;
+      margin-top: auto;   /* pins the link to the bottom of the card */
+    }
+    .cov-link svg {
+      width: 16px; height: 16px;
+      stroke: currentColor; stroke-width: 2; fill: none;
+      stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 0.25s ease;
+    }
+    .cov-card:hover .cov-link svg { transform: translateX(5px); }
+    /* stronger tile + tag fill against the brighter gold */
+    .cov-card.olive .cov-icon { background: rgba(9,18,40,0.22); }
+    .cov-card.olive .cov-tags span { background: rgba(255,255,255,0.24); }
+    /* denser tag set on the commercial card */
+    .cov-card.olive .cov-tags { gap: 5px; }
+    .cov-card.olive .cov-tags span { padding: 5px 9px; font-size: 11.5px; }
 
     /* Socials */
     .socials { display: flex; gap: 10px; }
@@ -296,11 +351,10 @@
       html, body { height: auto; overflow: auto; }
       body { display: block; }
       .page { height: auto; grid-template-columns: 1fr; }
-      .left { padding: 2rem 1.75rem 1.5rem; align-items: center; text-align: center; overflow: visible; }
-      .desc { max-width: 520px; }
-      .badge { margin: 0 auto 1rem; }
-      .countdown { justify-content: center; }
-      .tagline { justify-content: center; }
+      .left { padding: 2rem 1.75rem 0.5rem; overflow: visible; }
+      h1 { font-size: clamp(1.5rem, 4.6vw, 2.4rem); }
+      .coverage-grid { max-width: 540px; margin: 0 auto; }
+      .cov-card { min-height: 0; }
       .socials { justify-content: center; }
       .right { align-items: center; padding: 1.5rem 1.75rem 2.5rem; overflow: visible; }
       .card { max-width: 540px; margin: 0 auto; padding: 1.5rem 1.75rem 1.25rem; display: block; }
@@ -312,6 +366,7 @@
       .navbar { padding: 0 1.25rem; height: 70px; }
       .navbar img { height: 90px; }
       .left { padding: 1.5rem 1.25rem 1.25rem; }
+      h1 { font-size: 1.55rem; max-width: none; }
       .right { padding: 1rem 1.25rem 2rem; }
       .row { grid-template-columns: 1fr; }
       .card { padding: 1.25rem 1.25rem 1rem; }
@@ -345,23 +400,37 @@
 
     <!-- LEFT -->
     <div class="left">
-      <span class="badge"><span class="badge-dot"></span>Coming Soon</span>
-      <h1>Coverage You Can<br><span>Count On.</span></h1>
-      <p class="desc">
-        InSapna Insurance is launching soon. Be the first to get your personalized quote and secure your coverage — personal or commercial, we've got you covered.
-      </p>
+      <div class="eyebrow"><span>Our Coverage</span></div>
+      <h1>Two ways we <span>secure, protect and grow</span>&nbsp; your assets</h1>
 
-      <div class="countdown" role="timer" aria-label="Launch countdown">
-        <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Days</span></div>
-        <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hours</span></div>
-        <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Minutes</span></div>
-        <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Seconds</span></div>
-      </div>
+      <div class="coverage-grid">
 
-      <div class="tagline" style="color: #e09b2f">
-        <div class="tline" style="color: #e09b2f;"></div>
-        <span style="color: #e09b2f" class="tagline-text">Secure &nbsp;·&nbsp; Protect &nbsp;·&nbsp; Grow</span>
-        <div class="tline"></div>
+        <a class="cov-card teal" href="#contact-form">
+          <span class="cov-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.5"/></svg>
+          </span>
+          <h3>Personal Lines</h3>
+          <div class="cov-tags">
+            <span>Auto</span><span>Home</span><span>Umbrella</span><span class="more">More</span>
+          </div>
+          <span class="cov-link">Fill the form
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a class="cov-card olive" href="#contact-form">
+          <span class="cov-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 8.5h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-11Z"/><path d="M9 8.5V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3.5"/></svg>
+          </span>
+          <h3>Commercial Lines</h3>
+          <div class="cov-tags">
+            <span>BOP</span><span>CPP</span><span>GL</span><span>BPP</span><span>Cyber</span><span>Business Umbrella</span><span class="more">More</span>
+          </div>
+          <span class="cov-link">Fill the form
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </span>
+        </a>
+
       </div>
     </div>
 
@@ -461,17 +530,6 @@
   </div>
 
   <script>
-    const LAUNCH = new Date('2026-09-01T00:00:00');
-    function tick() {
-      const diff = LAUNCH - Date.now();
-      if (diff <= 0) { ['days','hours','mins','secs'].forEach(id => document.getElementById('cd-'+id).textContent='00'); return; }
-      document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
-      document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
-      document.getElementById('cd-mins').textContent  = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-      document.getElementById('cd-secs').textContent  = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
-    }
-    tick(); setInterval(tick, 1000);
-
     document.getElementById('phone').addEventListener('input', function () {
       let v = this.value.replace(/\D/g,'').slice(0,10);
       if (v.length>6) v='('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6);
