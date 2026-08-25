@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Form endpoint — nothing for a crawler to index
+Disallow: /api/
+
+Sitemap: https://insapnainsurance.com/sitemap.xml
